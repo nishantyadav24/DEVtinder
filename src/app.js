@@ -1,70 +1,34 @@
 const express = require("express");
-const { adminAuth, userAuth } = require("./middlewares/auth");
 
+const connectDB  = require("./config/database")
+const User = require("./models/Users")
 const app = express();
+// i need a middleware now 
+app.post('/signup',async (req,res)=>{
+    // const userObj ={
+    //     firstName:"Nishant",
+    //     lastName:"Yaduvanshi",
+    //     emailId:"nishant15@gmail.com",
+    //     password:"coakljscbajnsblo",
+    //     age:"18",
+    //     gender:"female"
+    // }
+    // const user = new User(userObj)
+    // await user.save()
+    console.log(req.body)
+    res.send("Request recieved")
+    // res.send("user added succesfully")
+    
+});
 
-// app.use('/admin',adminAuth)
-// app.use('/admin',userAuth )
-//     (req,res)=>{
-//     //request handler 
-//     console.log("handling second route")
+connectDB().then(()=>{
+    console.log("database connected succesfuly ")
+     app.listen(4000, () => {
+        console.log(`Server is running on port ${4000}`);
+    });
+   }).catch((err)=>{
+   console.error("database  cannot be connected")
+   })
 
-//     res.send("route handler 2  ")
-// })
-    // next();
-// },
-//     (req,res)=>{
-//     //request handler 
 
-//     // res.send("route handler 1  ")
-// },
-//     (req,res)=>{
-//     //request handler 
 
-//     // res.send("route handler 1  ")
-// },
-//     (req,res)=>{
-//     //request handler 
-
-//     // res.send("route handler 1  ")
-// })
-//order of wrinting the routes matter a lot
-
-app.get('/user/admin/getAllData',
-(req,res)=>{
-    //request handler 
-   
-
-    res.send("all data sent ")})
-app.get('/user/admin/deleteUser',
-(req,res)=>{
-    //check first if the request is sautodrized
-    console.log("handling delete route")
-
-    res.send("route handler 3 ")})
-app.get('/user/admin/SaveAllData',
-(req,res)=>{
-    //request handler 
-    console.log("handling daata save route")
-
-    res.send("route handler 3 ")})
-//wildcard error handling
-    app.use('/',(error,req,res,next)=>{
-        if(error){
-            res.status(500).send("somethingn went wrong ")
-        }
-    })
-// app.get("/getUserData",(req,res)=>{
-//     try{
-//         //logic of db call 
-
-//          throw new Error("sdasda")
-//     } 
-//     catch(error){
-//         res.status(500).send("contact unable to restablish  ")
-//     }
-// })
-
-app.listen(3000,()=>{
-    console.log("server is sucessfully listening on this port  ")
-})
