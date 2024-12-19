@@ -23,6 +23,37 @@ else if(!validator.isStrongPassword(password)){
 
 
 }
+const validateEditProfileData = (req) => {
+    const allowedEditFields = [
+      "firstName",
+      "lastName",
+      "emailId",
+      "photoURL",
+      "gender",
+      "age",
+      "about",
+      "skills",
+    ];
+  
+    // Check for invalid fields
+    const invalidFields = Object.keys(req.body).filter(
+      (field) => !allowedEditFields.includes(field)
+    );
+  
+    if (invalidFields.length > 0) {
+      return {
+        isValid: false,
+        message: "Invalid fields in request",
+        invalidFields,
+      };
+    }
+  
+    return { isValid: true };
+  };
+  
+  module.exports = { validateEditProfileData };
+  
 module.exports={
+    validateEditProfileData,
     validateSignUpData
 }

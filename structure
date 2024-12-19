@@ -1,0 +1,39 @@
+API Documentation
+
+Authentication Router
+
+POST /signup - Sign up a new user.
+POST /login - Log in an existing user.
+POST /logout - Log out the current user.
+
+Profile Router
+
+GET /profile/view - View the user's profile.
+
+PATCH /profile/edit - Edit the user's profile.
+
+PATCH /profile/password - Update or reset the user's password (Forgot password API).
+
+Connection Request Router
+
+POST /request/send/:status/userID
+POST /request/review/accepted/:requestId - Accept a connection request by its ID.
+
+POST /request/review/rejected/:requestId - Reject a connection request by its ID.
+
+User Router
+
+GET /user/connections - Get the list of all connected users.
+GET /user/requests - Get the list of connection requests for the current user.
+GET /user/feed - Fetch the profiles of other users on the platform.
+
+Status Codes for Connection Requests
+
+ignore
+
+interested
+
+accepted
+
+rejected
+
